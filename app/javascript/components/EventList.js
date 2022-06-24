@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 
 // イベントオブジェクトの配列を受け取り、ソート済みリストとしてレンダリングする
 const EventList = ({ events }) => {
@@ -9,9 +10,11 @@ const EventList = ({ events }) => {
 
     return eventArray.map((event) => (
       <li key={event.id}>
-        {event.event_date}
-        -
-        {event.event_type}
+        <Link to={`/events/${event.id}`}>
+          {event.event_date}
+          -
+          {event.event_type}
+        </Link>
       </li>
     ));
   };
