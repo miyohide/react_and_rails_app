@@ -39,6 +39,7 @@ const Editor = () => {
             <EventList events={events} />
 
             <Routes>
+              <Route path="new" element={<EventForm />} />
               <Route path=":id" element={<Event events={events} />} />
             </Routes>
           </>
