@@ -3,6 +3,7 @@ import Header from './Header';
 import EventList from './EventList';
 import { Routes, Route } from "react-router-dom";
 import Event from "./Event";
+import EventForm from "./EventForm";
 
 const Editor = () => {
   const [events, setEvents] = useState([]);
