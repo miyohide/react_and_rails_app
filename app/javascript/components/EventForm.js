@@ -83,7 +83,7 @@ const EventForm = () => {
         <div>
           <label htmlFor="event_date">
             <strong>Date:</strong>
-            <input type="text" id="event_date" name="event_date" onChange={handleInputChange} />
+            <input type="text" id="event_date" name="event_date" ref={dateInput} autoComplete="off" />
           </label>
         </div>
         <div>
