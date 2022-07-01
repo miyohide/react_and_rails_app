@@ -68,6 +68,10 @@ const EventForm = () => {
     return () => p.destroy();
   }, []);
 
+  const updateEvent = (key, value) => {
+    setEvent((prevEvent) => ({...prevEvent, [key]: value}));
+  };
+
   return (
     <section>
       {renderErrors()}
