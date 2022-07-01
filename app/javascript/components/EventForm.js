@@ -54,6 +54,20 @@ const EventForm = () => {
     }
   };
 
+  useEffect(() => {
+    const p = new Pikaday({
+      field: dateInput.current,
+      onSelect: (date) => {
+        const formattedDate = formatDate(date);
+        dateInput.current.value = formattedDate;
+        updateEvent("event_date", formattedDate);
+      },
+    });
+    // クリーンアップ用の関数を返す
+    // Reactはアンマウントの前にこれを呼び出す
+    return () => p.destroy();
+  }, []);
+
   return (
     <section>
       {renderErrors()}
