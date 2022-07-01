@@ -1,5 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { isEmptyObject, validateEvent } from "../helpers/helpers";
+import Pikaday from 'pikaday';
+import 'pikaday/css/pikaday.css';
 
 const EventForm = () => {
   const [event, setEvent] = useState({
