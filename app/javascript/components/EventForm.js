@@ -15,6 +15,8 @@ const EventForm = () => {
   });
   const [formErrors, setFormErrors] = useState({});
 
+  const dateInput = useRef(null);
+
   const handleInputChange = (e) => {
     const { target } = e;
     const { name } = target;
