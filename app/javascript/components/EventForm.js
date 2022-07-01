@@ -22,7 +22,7 @@ const EventForm = () => {
     const { name } = target;
     const value = target.type === "checkbox" ? target.checked : target.value;
 
-    setEvent({...event, [name]: value});
+    updateEvent(name, value);
   };
 
   // エラーメッセージを出力する
