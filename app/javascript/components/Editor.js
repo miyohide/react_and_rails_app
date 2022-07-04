@@ -54,6 +54,27 @@ const Editor = () => {
     }
   };
 
+  const deleteEvent = async (eventId) => {
+    const sure = window.confirm("Are you sure?");
+
+    if (sure) {
+      try {
+        // APIにDELETEリクエストを投げて対象のイベントを削除する
+        const response = await window.fetch(`/api/events/${eventId}`, {
+          method: "DELETE",
+        });
+
+        if (!response.ok) throw Error(response.statusText);
+
+        window.alert("Event Deleted!");
+        navigate("/events");
+        setEvents(events.filter(event => event.id !== eventId));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <>
       <Header />
