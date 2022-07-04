@@ -88,7 +88,7 @@ const Editor = () => {
 
             <Routes>
               <Route path="new" element={<EventForm onSave={addEvent} />} />
-              <Route path=":id" element={<Event events={events} />} />
+              <Route path=":id" element={<Event events={events} onDelete={deleteEvent} />} />
             </Routes>
           </>
         )}
