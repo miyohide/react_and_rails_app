@@ -4,6 +4,7 @@ import EventList from './EventList';
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Event from "./Event";
 import EventForm from "./EventForm";
+import {success} from "../helpers/notifications";
 
 const Editor = () => {
   const [events, setEvents] = useState([]);
@@ -47,7 +48,7 @@ const Editor = () => {
       const savedEvent = await response.json();
       const newEvents = [...events, savedEvent];
       setEvents(newEvents);
-      window.alert("Event Added!");
+      success("Event Added!");
       navigate(`/events/${savedEvent.id}`);
     } catch (error) {
       console.error(error);
@@ -66,7 +67,7 @@ const Editor = () => {
 
         if (!response.ok) throw Error(response.statusText);
 
-        window.alert("Event Deleted!");
+        success("Event Deleted!");
         navigate("/events");
         setEvents(events.filter(event => event.id !== eventId));
       } catch (error) {
