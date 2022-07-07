@@ -77,6 +77,10 @@ const EventForm = ({events, onSave}) => {
     return () => p.destroy();
   }, []);
 
+  useEffect(() => {
+    setEvent(initialEventState);
+  }, [events]);
+
   const updateEvent = (key, value) => {
     setEvent((prevEvent) => ({...prevEvent, [key]: value}));
   };
