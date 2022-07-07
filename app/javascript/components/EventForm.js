@@ -21,7 +21,8 @@ const EventForm = ({events, onSave}) => {
   // 更新対象のEvent、もしくは空オブジェクト（新規の場合）を設定する
   const currEvent = id ? events.find((e) => e.id === Number(id)) : {};
   const initialEventState = {...defaults, ...currEvent}
-  const [formErrors, setFormErrors] = useState(initialEventState);
+  const [event, setEvent] = useState(initialEventState);
+  const [formErrors, setFormErrors] = useState({});
 
   const dateInput = useRef(null);
 
