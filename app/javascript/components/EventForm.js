@@ -3,18 +3,25 @@ import {formatDate, isEmptyObject, validateEvent} from "../helpers/helpers";
 import Pikaday from 'pikaday';
 import 'pikaday/css/pikaday.css';
 import PropTypes from "prop-types";
+import {useParams} from "react-router-dom";
 
-const EventForm = ({onSave}) => {
-  const [event, setEvent] = useState({
-    // 初期化
+const EventForm = ({events, onSave}) => {
+  // URLから得た現在のEventのIDを取得する。新規の場合はundefined
+  const { id } = useParams();
+
+  const defaults = {
     event_type: "",
     event_date: "",
     title: "",
     speaker: "",
     host: "",
     published: false,
-  });
-  const [formErrors, setFormErrors] = useState({});
+  }
+
+  // 更新対象のEvent、もしくは空オブジェクト（新規の場合）を設定する
+  const currEvent = id ? events.find((e) => e.id === Number(id)) : {};
+  const initialEventState = {...defaults, ...currEvent}
+  const [formErrors, setFormErrors] = useState(initialEventState);
 
   const dateInput = useRef(null);
 
