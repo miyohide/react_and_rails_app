@@ -81,57 +81,72 @@ const EventForm = ({events, onSave}) => {
   };
 
   return (
-    <section>
+    <div>
+      <h2>New Event</h2>
       {renderErrors()}
 
-      <h2>New Event</h2>
       <form className="eventForm" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="event_type">
             <strong>Type:</strong>
-            <input type="text" id="event_type" name="event_type" onChange={handleInputChange} />
+            <input type="text" id="event_type" name="event_type" onChange={handleInputChange} value={event.event_type} />
           </label>
         </div>
         <div>
           <label htmlFor="event_date">
             <strong>Date:</strong>
-            <input type="text" id="event_date" name="event_date" ref={dateInput} autoComplete="off" />
+            <input type="text" id="event_date" name="event_date" ref={dateInput} autoComplete="off" value={event.event_date} onChange={handleInputChange} />
           </label>
         </div>
         <div>
           <label htmlFor="title">
             <strong>Title:</strong>
-            <textarea cols="30" rows="10" type="text" id="title" name="title" onChange={handleInputChange} />
+            <textarea cols="30" rows="10" type="text" id="title" name="title" onChange={handleInputChange} value={event.title} />
           </label>
         </div>
         <div>
           <label htmlFor="speaker">
             <strong>Speakers:</strong>
-            <input type="text" id="speaker" name="speaker" onChange={handleInputChange} />
+            <input type="text" id="speaker" name="speaker" onChange={handleInputChange} value={event.speaker} />
           </label>
         </div>
         <div>
           <label htmlFor="host">
             <strong>Hosts:</strong>
-            <input type="text" id="host" name="host" onChange={handleInputChange} />
+            <input type="text" id="host" name="host" onChange={handleInputChange} value={event.host} />
           </label>
         </div>
         <div>
           <label htmlFor="published">
             <strong>Publish:</strong>
-            <input type="checkbox" id="published" name="published" onChange={handleInputChange} />
+            <input type="checkbox" id="published" name="published" onChange={handleInputChange} value={event.published} />
           </label>
         </div>
         <div className="form-actions">
           <button type="submit">Save</button>
         </div>
       </form>
-    </section>
+    </div>
   );
 };
 
 export default EventForm;
 
 EventForm.propTypes = {
+  events: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      event_type: PropTypes.string.isRequired,
+      event_date: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      speaker: PropTypes.string.isRequired,
+      host: PropTypes.string.isRequired,
+      published: PropTypes.bool.isRequired,
+    })
+  ),
   onSave: PropTypes.func.isRequired,
+};
+
+EventForm.defaultProps = {
+  events: [],
 };
