@@ -1,26 +1,26 @@
-import React, {useEffect, useRef, useState} from "react";
-import {formatDate, isEmptyObject, validateEvent} from "../helpers/helpers";
+import React, { useEffect, useRef, useState } from 'react';
+import { formatDate, isEmptyObject, validateEvent } from '../helpers/helpers';
 import Pikaday from 'pikaday';
 import 'pikaday/css/pikaday.css';
-import PropTypes from "prop-types";
-import {useParams} from "react-router-dom";
+import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
-const EventForm = ({events, onSave}) => {
+const EventForm = ({ events, onSave }) => {
   // URLから得た現在のEventのIDを取得する。新規の場合はundefined
   const { id } = useParams();
 
   const defaults = {
-    event_type: "",
-    event_date: "",
-    title: "",
-    speaker: "",
-    host: "",
+    event_type: '',
+    event_date: '',
+    title: '',
+    speaker: '',
+    host: '',
     published: false,
-  }
+  };
 
   // 更新対象のEvent、もしくは空オブジェクト（新規の場合）を設定する
   const currEvent = id ? events.find((e) => e.id === Number(id)) : {};
-  const initialEventState = {...defaults, ...currEvent}
+  const initialEventState = { ...defaults, ...currEvent };
   const [event, setEvent] = useState(initialEventState);
   const [formErrors, setFormErrors] = useState({});
 
@@ -29,7 +29,7 @@ const EventForm = ({events, onSave}) => {
   const handleInputChange = (e) => {
     const { target } = e;
     const { name } = target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
 
     updateEvent(name, value);
   };
@@ -57,7 +57,7 @@ const EventForm = ({events, onSave}) => {
     const errors = validateEvent(event);
 
     if (!isEmptyObject(errors)) {
-      setFormErrors(errors)
+      setFormErrors(errors);
     } else {
       onSave(event);
     }
@@ -66,11 +66,11 @@ const EventForm = ({events, onSave}) => {
   useEffect(() => {
     const p = new Pikaday({
       field: dateInput.current,
-      toString: date => formatDate(date),
+      toString: (date) => formatDate(date),
       onSelect: (date) => {
         const formattedDate = formatDate(date);
         dateInput.current.value = formattedDate;
-        updateEvent("event_date", formattedDate);
+        updateEvent('event_date', formattedDate);
       },
     });
     // クリーンアップ用の関数を返す
@@ -83,7 +83,7 @@ const EventForm = ({events, onSave}) => {
   }, [events]);
 
   const updateEvent = (key, value) => {
-    setEvent((prevEvent) => ({...prevEvent, [key]: value}));
+    setEvent((prevEvent) => ({ ...prevEvent, [key]: value }));
   };
 
   return (
@@ -148,7 +148,7 @@ EventForm.propTypes = {
       speaker: PropTypes.string.isRequired,
       host: PropTypes.string.isRequired,
       published: PropTypes.bool.isRequired,
-    })
+    }),
   ),
   onSave: PropTypes.func.isRequired,
 };

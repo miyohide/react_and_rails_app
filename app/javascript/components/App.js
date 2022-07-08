@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Editor from './Editor';
 import './App.css';
-import {ToastContainer} from "react-toastify";
+import { ToastContainer } from 'react-toastify';
 
 const App = () => (
   <>
@@ -11,6 +11,6 @@ const App = () => (
     </Routes>
     <ToastContainer />
   </>
-)
+);
 
 export default App;

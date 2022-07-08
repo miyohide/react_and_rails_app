@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import EventList from './EventList';
-import { Routes, Route, useNavigate } from "react-router-dom";
-import Event from "./Event";
-import EventForm from "./EventForm";
-import {success} from "../helpers/notifications";
+import Event from './Event';
+import EventForm from './EventForm';
+import { success } from '../helpers/notifications';
 
 const Editor = () => {
   const [events, setEvents] = useState([]);
@@ -34,12 +34,12 @@ const Editor = () => {
   // 新しいイベントを作成するリクエストをAPIに送信する
   const addEvent = async (newEvent) => {
     try {
-      const response = await window.fetch("/api/events", {
-        method: "POST",
+      const response = await window.fetch('/api/events', {
+        method: 'POST',
         body: JSON.stringify(newEvent),
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
       });
       if (!response.ok) throw Error(response.statusText);
@@ -48,7 +48,7 @@ const Editor = () => {
       const savedEvent = await response.json();
       const newEvents = [...events, savedEvent];
       setEvents(newEvents);
-      success("Event Added!");
+      success('Event Added!');
       navigate(`/events/${savedEvent.id}`);
     } catch (error) {
       console.error(error);
@@ -56,20 +56,20 @@ const Editor = () => {
   };
 
   const deleteEvent = async (eventId) => {
-    const sure = window.confirm("Are you sure?");
+    const sure = window.confirm('Are you sure?');
 
     if (sure) {
       try {
         // APIにDELETEリクエストを投げて対象のイベントを削除する
         const response = await window.fetch(`/api/events/${eventId}`, {
-          method: "DELETE",
+          method: 'DELETE',
         });
 
         if (!response.ok) throw Error(response.statusText);
 
-        success("Event Deleted!");
-        navigate("/events");
-        setEvents(events.filter(event => event.id !== eventId));
+        success('Event Deleted!');
+        navigate('/events');
+        setEvents(events.filter((event) => event.id !== eventId));
       } catch (error) {
         console.error(error);
       }
@@ -81,13 +81,13 @@ const Editor = () => {
       const response = await window.fetch(
         `/api/events/${updatedEvent.id}`,
         {
-          method: "PUT",
+          method: 'PUT',
           body: JSON.stringify(updatedEvent),
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
-        }
+        },
       );
 
       if (!response.ok) throw Error(response.statusText);
@@ -97,7 +97,7 @@ const Editor = () => {
       newEvents[idx] = updatedEvent;
       setEvents(newEvents);
 
-      success("Event Updated!");
+      success('Event Updated!');
       navigate(`/events/${updatedEvent.id}`);
     } catch (error) {
       handleAjaxError(error);
@@ -111,7 +111,7 @@ const Editor = () => {
         {isError && <p>Something went wrong. Check the console.</p>}
         {isLoading ? (
           <p>Loading...</p>
-        ): (
+        ) : (
           <>
             <EventList events={events} />
 
