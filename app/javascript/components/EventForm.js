@@ -94,6 +94,9 @@ const EventForm = ({ events, onSave }) => {
     setEvent((prevEvent) => ({ ...prevEvent, [key]: value }));
   };
 
+  const cancelURL = event.id ? `/events/${event.id}` : '/events';
+  const title = event.id ? `${event.event_date} - ${event.event_type}` : 'New Event';
+
   return (
     <div>
       <h2>New Event</h2>
@@ -138,6 +141,7 @@ const EventForm = ({ events, onSave }) => {
         </div>
         <div className="form-actions">
           <button type="submit">Save</button>
+          <Link to={cancelURL}>Cancel</Link>
         </div>
       </form>
     </div>
