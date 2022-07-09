@@ -1,6 +1,8 @@
 // 引数として与えられたオブジェクトが空であるか否か判定
 export const isEmptyObject = (obj) => Object.keys(obj).length === 0;
 
+const isValidDate = dateObj => !Number.isNaN(Date.parse(dateObj));
+
 // フォームに入力された値の妥当性検証。問題があればerrorsに値を入れる
 export const validateEvent = (event) => {
   const errors = {};
@@ -8,7 +10,7 @@ export const validateEvent = (event) => {
   if (event.type === "") {
     errors.event_type = "You must enter an event type";
   }
-  if (event.event_date === "") {
+  if (!isValidDate(event.event_date)) {
     errors.event_date = "You must enter a valid date";
   }
   if (event.title === "") {
