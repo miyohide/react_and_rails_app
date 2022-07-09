@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import { formatDate, isEmptyObject, validateEvent } from '../helpers/helpers';
 import Pikaday from 'pikaday';
 import 'pikaday/css/pikaday.css';
@@ -9,18 +9,26 @@ const EventForm = ({ events, onSave }) => {
   // URLから得た現在のEventのIDを取得する。新規の場合はundefined
   const { id } = useParams();
 
-  const defaults = {
-    event_type: '',
-    event_date: '',
-    title: '',
-    speaker: '',
-    host: '',
-    published: false,
-  };
+  const initialEventState = useCallback(
+    () => {
+      const defaults = {
+        event_type: '',
+        event_date: '',
+        title: '',
+        speaker: '',
+        host: '',
+        published: false,
+      };
 
-  // 更新対象のEvent、もしくは空オブジェクト（新規の場合）を設定する
-  const currEvent = id ? events.find((e) => e.id === Number(id)) : {};
-  const initialEventState = { ...defaults, ...currEvent };
+      // 更新対象のEvent、もしくは空オブジェクト（新規の場合）を設定する
+      const currEvent = id ?
+        events.find((e) => e.id === Number(id)):
+        {};
+
+      return {...defaults, ...currEvent}
+    },
+    [events, id]
+  )
   const [event, setEvent] = useState(initialEventState);
   const [formErrors, setFormErrors] = useState({});
 
