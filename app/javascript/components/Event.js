@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import EventNotFound from "./EventNotFound";
 
 const Event = ({ events, onDelete }) => {
   // URL内の動的パラメータを含むオブジェクトにアクセスする
   const { id } = useParams();
   // 表示したいイベントを検索する
   const event = events.find((e) => e.id === Number(id));
+
+  if (!event) return <EventNotFound />;
 
   return (
     <div className="eventContainer">
