@@ -18,7 +18,7 @@ const EventList = ({ events }) => {
     );
   };
 
-  const renderEvents = (eventArray) => {
+  const renderEvents = (eventArray) =>
     eventArray
       .filter((el) => matchSearchTerm(el))
       .sort((a, b) => new Date(b.event_date) - new Date(a.event_date))
@@ -31,7 +31,6 @@ const EventList = ({ events }) => {
           </NavLink>
         </li>
       ));
-  };
 
   return (
     <section className="eventList">
