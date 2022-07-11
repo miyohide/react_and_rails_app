@@ -11,6 +11,8 @@ const EventList = ({ events }) => {
     setSearchTerm(searchInput.current.value);
   };
 
+  // 検索語を含むイベント（ただし、idやpublished, created_at, updated_atを除く）
+  // を返すメソッド。文字列はすべて小文字にして検索する
   const matchSearchTerm = (obj) => {
     const {id, published, created_at, updated_at, ...rest} = obj;
     return Object.values(rest).some(
@@ -20,8 +22,8 @@ const EventList = ({ events }) => {
 
   const renderEvents = (eventArray) =>
     eventArray
-      .filter((el) => matchSearchTerm(el))
-      .sort((a, b) => new Date(b.event_date) - new Date(a.event_date))
+      .filter((el) => matchSearchTerm(el))  // フィルタリングする
+      .sort((a, b) => new Date(b.event_date) - new Date(a.event_date))  // ソートする
       .map((event) => (
         <li key={event.id}>
           <NavLink to={`/events/${event.id}`}>
