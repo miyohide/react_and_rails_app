@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import EventNotFound from "./EventNotFound";
+import EventNotFound from './EventNotFound';
 
 const Event = ({ events, onDelete }) => {
   // URL内の動的パラメータを含むオブジェクトにアクセスする

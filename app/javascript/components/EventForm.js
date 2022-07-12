@@ -1,10 +1,12 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 import { formatDate, isEmptyObject, validateEvent } from '../helpers/helpers';
 import Pikaday from 'pikaday';
 import 'pikaday/css/pikaday.css';
 import PropTypes from 'prop-types';
 import { useParams, Link } from 'react-router-dom';
-import EventNotFound from "./EventNotFound";
+import EventNotFound from './EventNotFound';
 
 const EventForm = ({ events, onSave }) => {
   // URLから得た現在のEventのIDを取得する。新規の場合はundefined
@@ -22,14 +24,14 @@ const EventForm = ({ events, onSave }) => {
       };
 
       // 更新対象のEvent、もしくは空オブジェクト（新規の場合）を設定する
-      const currEvent = id ?
-        events.find((e) => e.id === Number(id)):
-        {};
+      const currEvent = id
+        ? events.find((e) => e.id === Number(id))
+        : {};
 
-      return {...defaults, ...currEvent}
+      return { ...defaults, ...currEvent };
     },
-    [events, id]
-  )
+    [events, id],
+  );
   const [event, setEvent] = useState(initialEventState);
   const [formErrors, setFormErrors] = useState({});
 
