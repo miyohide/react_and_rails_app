@@ -1,11 +1,11 @@
 import React, {
   useCallback, useEffect, useRef, useState,
 } from 'react';
-import { formatDate, isEmptyObject, validateEvent } from '../helpers/helpers';
 import Pikaday from 'pikaday';
 import 'pikaday/css/pikaday.css';
 import PropTypes from 'prop-types';
 import { useParams, Link } from 'react-router-dom';
+import { formatDate, isEmptyObject, validateEvent } from '../helpers/helpers';
 import EventNotFound from './EventNotFound';
 
 const EventForm = ({ events, onSave }) => {
