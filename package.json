@@ -28,5 +28,10 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^28.1.3"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/app/javascript"
+    ]
   }
 }
