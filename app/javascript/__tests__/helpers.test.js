@@ -1,4 +1,4 @@
-import {formatDate} from '../helpers/helpers'
+import {formatDate, isEmptyObject} from '../helpers/helpers'
 
 describe('formatDate', () => {
   test('日付がyyyy-mm-dd形式となること', () => {
@@ -11,5 +11,15 @@ describe('formatDate', () => {
     expect(formatDate(new Date(2022, 9, 4))).toBe('2022-10-04')
     // 日が2桁の場合、0埋めされないこと
     expect(formatDate(new Date(2022, 10, 13))).toBe('2022-11-13')
+  })
+})
+
+describe('isEmptyObject', () => {
+  test('空のオブジェクトを与えたときにtrueが返ること', () => {
+    expect(isEmptyObject({})).toBeTruthy()
+  })
+
+  test('値があるオブジェクトを与えたときにfalseが返ること', () => {
+    expect(isEmptyObject({a: 'foobar'})).toBeFalsy()
   })
 })
