@@ -1,4 +1,4 @@
-import {formatDate, isEmptyObject} from '../helpers/helpers'
+import {formatDate, isEmptyObject, validateEvent} from '../helpers/helpers'
 
 describe('formatDate', () => {
   test('日付がyyyy-mm-dd形式となること', () => {
@@ -21,5 +21,23 @@ describe('isEmptyObject', () => {
 
   test('値があるオブジェクトを与えたときにfalseが返ること', () => {
     expect(isEmptyObject({a: 'foobar'})).toBeFalsy()
+  })
+})
+
+describe('validateEvent', () => {
+  test('typeが空文字のとき、戻り値のevent_typeにはエラーメッセージが入っていること', () => {
+    expect(validateEvent({type: ''}).event_type).toBe('You must enter an event type')
+  })
+  test('event_dateが日付の文字列でないとき、戻り値のevent_typeにはエラーメッセージが入っていること', () => {
+    expect(validateEvent({event_date: '2022-12-99'}).event_date).toBe('You must enter a valid date')
+  })
+  test('titleが空文字のとき、戻り値のevent_titleにはエラーメッセージが入っていること', () => {
+    expect(validateEvent({title: ''}).title).toBe('You must enter a title')
+  })
+  test('speakerが空文字のとき、戻り値のevent_speakerにはエラーメッセージが入っていること', () => {
+    expect(validateEvent({speaker: ''}).speaker).toBe('You must enter at least one speaker')
+  })
+  test('hostが空文字のとき、戻り値のevent_hostにはエラーメッセージが入っていること', () => {
+    expect(validateEvent({host: ''}).host).toBe('You must enter at least one host')
   })
 })
