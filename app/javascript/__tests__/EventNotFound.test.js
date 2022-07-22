@@ -5,8 +5,11 @@ import {render, screen} from "@testing-library/react";
 import EventNotFound from "../components/EventNotFound";
 import '@testing-library/jest-dom/extend-expect';
 
-test('renders EventNotFound', () => {
-  render(<EventNotFound />);
-  const notfound = screen.getByText(/Event/);
-  expect(notfound).toHaveTextContent('Event not found!');
-})
+describe('EventNotFound', () => {
+  test('renders EventNotFound component', () => {
+    render(<EventNotFound />);
+    // 'Event not found!'を持つ要素を検索し、toBeInTheDocument()で
+    // ドキュメント内にあることを検索する
+    expect(screen.getByText('Event not found!')).toBeInTheDocument();
+  })
+});
