@@ -7,12 +7,12 @@ import EventList from "../components/EventList";
 import { MemoryRouter as Router } from "react-router-dom";
 
 describe('EventList', () => {
-  test('renders EventList component', () => {
+  test('renders EventList component without events', () => {
     render(
       <Router>
         <EventList events={[]} />
       </Router>
       );
-    screen.debug();
+    expect(screen.getByText('New Event')).toBeInTheDocument();
   })
 });
