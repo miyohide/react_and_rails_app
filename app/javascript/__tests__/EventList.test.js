@@ -15,4 +15,24 @@ describe('EventList', () => {
       );
     expect(screen.getByText('New Event')).toBeInTheDocument();
   })
+
+  test('renders EventList component with event', () => {
+    render(
+      <Router>
+        <EventList events={[
+          {
+            id: 1,
+            event_type: 'event type',
+            event_date: '2022-01-01',
+            title: 'event title',
+            speaker: 'event speaker',
+            host: 'event host',
+            published: true
+          }
+        ]} />
+      </Router>
+    );
+    // screen.debug();
+    expect(screen.getByText(/event type/).closest('a')).toHaveAttribute('href', '/events/1');
+  })
 });
