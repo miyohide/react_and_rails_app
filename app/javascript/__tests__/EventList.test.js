@@ -32,7 +32,7 @@ describe('EventList', () => {
         ]} />
       </Router>
     );
-    // screen.debug();
+    // 与えたeventのevent_typeの値に紐づくaタグを探しURLが/events/+idとなっていることを確認する
     expect(screen.getByText(/event type/).closest('a')).toHaveAttribute('href', '/events/1');
   })
 });
