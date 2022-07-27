@@ -46,7 +46,13 @@ describe('EventList', () => {
         ]} />
       </Router>
     );
-    // 与えたeventのevent_typeの値に紐づくaタグを探しURLが/events/+idとなっていることを確認する
-    expect(screen.getByText(/event type1/).closest('a')).toHaveAttribute('href', '/events/1');
+    // Linkを全部抽出する。HTMLに明示的／暗黙的に設定されるRole属性を使って抽出する。
+    // see. https://www.w3.org/TR/html-aria/#docconformance
+    const atags = screen.getAllByRole('link');
+    // Linkの属性を確認する。eventsは日付の新しい順でソートされている。
+    expect(atags[0]).toHaveAttribute('href', '/events/new');
+    expect(atags[1]).toHaveAttribute('href', '/events/2');
+    expect(atags[2]).toHaveAttribute('href', '/events/1');
+    expect(atags[3]).toHaveAttribute('href', '/events/3');
   })
 });
