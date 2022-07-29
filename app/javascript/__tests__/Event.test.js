@@ -10,7 +10,7 @@ describe('Event', () => {
   test('renders Event component without events', () => {
     render(
       <Router>
-        <Event events={[]} onDelete={() => {}}/>
+        <Event events={[]} onDelete={jest.fn()} />
       </Router>
     );
     expect(screen.getByText(/Event not found!/)).toBeInTheDocument();
