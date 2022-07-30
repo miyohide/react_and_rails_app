@@ -40,6 +40,11 @@ describe('Event', () => {
         ]} onDelete={jest.fn()} />
       </MemoryRouter>
     );
-    expect(screen.getByText(/Edit/).closest('a')).toHaveAttribute('href', '/events/1/edit');
+    // Linkを全部抽出する。HTMLに明示的／暗黙的に設定されるRole属性を使って抽出する。
+    // see. https://www.w3.org/TR/html-aria/#docconformance
+    const atags = screen.getAllByRole('link');
+    expect(atags.length).toBe(1)
+    // Linkの属性を確認する。
+    expect(atags[0]).toHaveAttribute('href', '/events/1/edit');
   })
 });
