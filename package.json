@@ -38,6 +38,9 @@
   "jest": {
     "roots": [
       "<rootDir>/app/javascript"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/app/javascript/__mocks__/styleMock.js"
+    }
   }
 }
