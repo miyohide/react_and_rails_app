@@ -41,6 +41,7 @@
     ],
     "moduleNameMapper": {
       "\\.(css|less|sass|scss)$": "<rootDir>/app/javascript/__mocks__/styleMock.js"
-    }
+    },
+    "testEnvironment": "jsdom"
   }
 }
