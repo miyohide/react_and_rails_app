@@ -16,7 +16,6 @@ test('renders Editor', async () => {
       published: true
     }
   ]
-  // global.fetch = jest.fn(() => Promise.resolve(dummyEvents))
   global.fetch = jest.fn(
     () => {
       return Promise.resolve({
